@@ -1,0 +1,7 @@
+{
+  "autoencoder_mse_threshold": 0.017193631827831256,
+  "autoencoder_mean_error": 0.00494392542168498,
+  "autoencoder_std_error": 0.04639408364892006,
+  "percentile_used": 95,
+  "validation_samples": 10767
+}
