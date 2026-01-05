@@ -1,0 +1,69 @@
+===================================================
+GUIA PARA CONFIGURAR SECURITY GROUP NA AWS
+===================================================
+
+PASSO A PASSO NO CONSOLE AWS:
+
+1. ACESSE O CONSOLE AWS:
+   - https://console.aws.amazon.com
+   - Faça login com suas credenciais
+
+2. VÁ PARA SERVIÇO EC2:
+   - Na barra de busca, digite "EC2" e clique no serviço
+
+3. ENCONTRE SUA INSTÂNCIA:
+   - No menu lateral, clique em "Instances"
+   - Localize sua instância (ip-172-31-42-201)
+   - Anote o "Security Group" associado (nome no campo Security)
+
+4. CONFIGURE O SECURITY GROUP:
+   - No menu lateral, clique em "Security Groups"
+   - Encontre o Security Group da sua instância
+   - Clique nele para ver detalhes
+
+5. ADICIONE REGRAS DE ENTRADA (Inbound Rules):
+   - Na aba "Inbound rules", clique em "Edit inbound rules"
+   - Clique em "Add rule"
+   
+   REGRAS NECESSÁRIAS:
+   
+   a) Grafana (HTTP):
+   - Type: Custom TCP
+   - Port range: 3000
+   - Source: 0.0.0.0/0 (para acesso de qualquer lugar)
+     OU  seu.IP.aqui/32 (para acesso apenas do seu IP)
+   - Description: Grafana Dashboard
+   
+   b) Prometheus (HTTP):
+   - Type: Custom TCP  
+   - Port range: 9090
+   - Source: 0.0.0.0/0 ou seu.IP.aqui/32
+   - Description: Prometheus Metrics
+   
+   c) API (opcional):
+   - Type: Custom TCP
+   - Port range: 8000
+   - Source: 0.0.0.0/0 ou seu.IP.aqui/32
+   - Description: Fraud Detection API
+   
+   d) Worker (opcional):
+   - Type: Custom TCP
+   - Port range: 8001  
+   - Source: 0.0.0.0/0 ou seu.IP.aqui/32
+   - Description: Worker Health
+
+6. SALVE AS REGRAS:
+   - Clique em "Save rules"
+   - Aguarde alguns segundos para propagação
+
+7. TESTE O ACESSO:
+   - No seu navegador, acesse:
+     http://54.145.187.17:3000  (Grafana)
+     http://54.145.187.17:9090  (Prometheus)
+
+===================================================
+IMPORTANTE SEGURANÇA:
+- Para produção, NÃO use 0.0.0.0/0
+- Use seu IP específico: seu.IP.aqui/32
+- Considere usar uma VPN ou bastion host
+===================================================
