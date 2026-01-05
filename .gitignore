@@ -1,0 +1,9 @@
+# Python
+.venv/
+__pycache__/
+
+# Data files
+data/*.csv
+
+# Environment variables
+.env
